@@ -1,0 +1,20 @@
+
+               STRING METHODLARI
+ 1) toUpperCase() : i)Tum harfleri buyuk harfe cevirir.
+                   ii) bize String data dondurur.
+ 2) toLoverCase() : i)tum harfleri kucuk harf yapar
+                   ii)bize String  data dondurur.
+ 3) charAt(0)      : i) bize data daki ilk karakteri dondurur
+                    ii) index ile calisir.
+ 4) lenght()      : i) bize datadaki harflerin uzunlugunu veriyor
+                   ii) bize int data dondurur
+ 5) substring()   : iki kullanimi vardir
+                   i) substring(baslangic indexi,bitis indeks)' i verilirse baslangic indexi dahil bitis indexi haric yazdiri.
+                   Metin ortasindan data almamizi saglar
+                   ii) substring(baslangic indexi) verilen indexten sonuna kadar alinmasini saglar
+                   Bu method bize String dondurur
+ 6) contains()    : bir data var mi? yokmu diye bakar
+                   Bize boolean bir deger dondurur
+ 7) startsWith () : Stringin verilen le baslayip baslamadigina bakar.
+                    Boolean doner. true/false
+

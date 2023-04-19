@@ -1,0 +1,5 @@
+      String methodlari
+
+1)       endswhit()  Metnin belirli bir data ile bitip bitmedigini verir.
+         Bize boolean bir sonuc dondurur.
+         Tek karakterde coklu karakterde kullanilabilir.
