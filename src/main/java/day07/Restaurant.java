@@ -1,6 +1,8 @@
 package day07;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Restaurant {
@@ -26,6 +28,7 @@ public class Restaurant {
 
         Scanner input = new Scanner(System.in);
         boolean exit = false;
+        Hesap fatura = new Hesap();
 
         while(!exit){
             System.out.println("*************** RESTAURANT SPARIS SISTEMI **********************");
@@ -55,15 +58,23 @@ public class Restaurant {
                     break;
                 case 3:
                     //3 - SPARIS IPTAL ET
+                    restaurant.cancelOrder();
+
                     break;
                 case 4:
                     //4 - SPARISLERI GOSTER
+                    restaurant.sparisleriGoster();
                     break;
                 case 5:
                     //5 - HESAP FISI YAZDIR
+                    for (Order order : orders ) {
+                        fatura.addOrder(order);
+                    }
+                    fatura.printHesap();
+
                     break;
                 default:
-                    System.out.println("Gecersin secim");
+                    System.out.println("Gecersiz secim");
 
             }
         }
@@ -72,6 +83,47 @@ public class Restaurant {
 
 
     }
+
+    private void sparisleriGoster() {
+        System.out.println("*********************SIPARISLERINIZ********************");
+        for (Order order : orders ) {
+            System.out.println("\nSiparis Kodu " + order.getOrderCode());
+            System.out.print("Yiyecek ");
+            HashMap <MenuItem, Integer > items = order.getItems();
+
+            for ( Map.Entry <MenuItem , Integer> entry : items.entrySet()) {
+
+                MenuItem item = entry.getKey();
+                int adet = entry.getValue();
+                System.out.printf("%-20s  %d  x %.2f TL\n", item.getName(), adet, item.getPrice());
+
+            }
+            System.out.printf("\nToplam Tutar : %.2f TL\n", order.getTotalAmount());
+        }
+    }
+
+    private void cancelOrder() { //3 - SPARIS IPTAL ET
+        Scanner input = new Scanner(System.in);
+        System.out.println("Lutfen iptal etmek istediginiz yigecegin sparis kodunu giriniz.");
+
+        for (Order order : orders ) {
+            System.out.print(order.getOrderCode() + " ");
+        }
+        System.out.println();
+        int orderCode = input.nextInt();
+        Order order = orders.stream().
+                filter(t->t.getOrderCode() == orderCode).
+                findFirst().
+                orElse(null);
+
+        if (order ==null){
+            System.out.println("Gecersiz sparis kodu girdiniz.");
+        }
+        orders.remove(order);
+        System.out.println("Sparisiniz iptal edildi.");
+        System.out.println();
+
+    }//cancel order methodu
 
     private void createOrder(int code, int adet) {//2 - SPARIS OLUSTUR
         MenuItem item =menu.
